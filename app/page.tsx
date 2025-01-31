@@ -6,12 +6,13 @@ import ListingCard from './components/listings/ListingCard';
 import getCurrentUser from './actions/getCurrentUser';
 
 interface HomeProps {
-  searchParams: IListingsParams;
+  searchParams: Promise<IListingsParams>; // Tipizza searchParams come Promise
 }
 
-// await non funzionerebbe se Home non fosse asincrona
+// Next.js 15 -> `searchParams` è una Promise, quindi va atteso con `await`
 const Home = async ({ searchParams }: HomeProps) => {
-  const listings = await getListings(searchParams);
+  const resolvedSearchParams = await searchParams; // Risolviamo la Promise
+  const listings = await getListings(resolvedSearchParams);
   const currentUser = await getCurrentUser();
 
   if (listings.length === 0) {
@@ -52,15 +53,3 @@ const Home = async ({ searchParams }: HomeProps) => {
 };
 
 export default Home;
-
-/* Old css
-// Minuto 4:50:00 per il css della listingCard
-grid 
-grid-cols-1 
-sm:grid-cols-2
-md:grid-cols-3 
-lg:grid-cols-4 
-xl:grid-cols-5 
-2xl:grid-cols-6 
-gap-8
-*/
