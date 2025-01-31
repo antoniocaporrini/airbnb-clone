@@ -1,23 +1,17 @@
 import { NextResponse } from 'next/server';
-
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import prisma from '@/app/libs/prismadb';
 
-interface IParams {
-  listingId?: string;
-}
-
-export async function DELETE(
-  request: Request,
-  { params }: { params: IParams }
-) {
+export async function DELETE(request: Request) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
     return NextResponse.error();
   }
 
-  const { listingId } = params;
+  // Estrai listingId dall'URL
+  const url = new URL(request.url);
+  const listingId = url.pathname.split('/').pop(); // Prendi l'ultimo segmento dell'URL
 
   if (!listingId || typeof listingId !== 'string') {
     throw new Error('Invalid ID');
@@ -26,7 +20,7 @@ export async function DELETE(
   const listing = await prisma.listing.deleteMany({
     where: {
       id: listingId,
-      userId: currentUser.id,
+      userId: currentUser.id, // Assicura che solo il proprietario possa eliminare
     },
   });
 
