@@ -5,13 +5,17 @@ import EmptyState from '@/app/components/EmptyState';
 import ListingClient from './ListingClient';
 import getReservations from '@/app/actions/getReservations';
 
-interface IParams {
-  listingId: string;
-}
+// Tipizza params come un oggetto generico `{ listingId?: string }`
+const ListingPage = async ({ params }: { params: { listingId?: string } }) => {
+  if (!params?.listingId) {
+    return (
+      <ClientOnly>
+        <EmptyState />
+      </ClientOnly>
+    );
+  }
 
-// Tipizza `params` correttamente come `{ listingId: string }`
-const ListingPage = async ({ params }: { params: IParams }) => {
-  // Passa un oggetto a getListingById e getReservations
+  // Passa l'ID come oggetto alle funzioni
   const listing = await getListingById({ listingId: params.listingId });
   const reservations = await getReservations({ listingId: params.listingId });
   const currentUser = await getCurrentUser();
