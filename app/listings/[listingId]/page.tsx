@@ -6,13 +6,14 @@ import ListingClient from './ListingClient';
 import getReservations from '@/app/actions/getReservations';
 
 interface IParams {
-  listingId?: string;
+  listingId: string;
 }
 
-// significa che ci aspettiamo un oggetto con una proprietà chiamata params, la cui struttura è definita dall'interfaccia IParams.
+// Tipizza `params` correttamente come `{ listingId: string }`
 const ListingPage = async ({ params }: { params: IParams }) => {
-  const listing = await getListingById(params); // getListingById utilizza il valore di params.listingId per recuperare i dati relativi a un determinato annuncio (listing).
-  const reservations = await getReservations(params); // in questo caso params è solo listingId
+  // Passa un oggetto a getListingById e getReservations
+  const listing = await getListingById({ listingId: params.listingId });
+  const reservations = await getReservations({ listingId: params.listingId });
   const currentUser = await getCurrentUser();
 
   if (!listing) {
