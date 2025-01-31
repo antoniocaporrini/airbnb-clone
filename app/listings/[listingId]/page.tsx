@@ -5,9 +5,16 @@ import EmptyState from '@/app/components/EmptyState';
 import ListingClient from './ListingClient';
 import getReservations from '@/app/actions/getReservations';
 
-// Tipizza params come un oggetto generico `{ listingId?: string }`
-const ListingPage = async ({ params }: { params: { listingId?: string } }) => {
-  if (!params?.listingId) {
+interface IParams {
+  listingId: string;
+}
+
+// Next.js 15 -> params è una Promise, quindi va atteso con `await`
+const ListingPage = async ({ params }: { params: Promise<IParams> }) => {
+  const resolvedParams = await params; // Risolviamo la Promise
+  const listingId = resolvedParams.listingId;
+
+  if (!listingId) {
     return (
       <ClientOnly>
         <EmptyState />
@@ -15,9 +22,9 @@ const ListingPage = async ({ params }: { params: { listingId?: string } }) => {
     );
   }
 
-  // Passa l'ID come oggetto alle funzioni
-  const listing = await getListingById({ listingId: params.listingId });
-  const reservations = await getReservations({ listingId: params.listingId });
+  // Passa un oggetto con listingId alle funzioni
+  const listing = await getListingById({ listingId });
+  const reservations = await getReservations({ listingId });
   const currentUser = await getCurrentUser();
 
   if (!listing) {
