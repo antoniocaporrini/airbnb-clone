@@ -8,6 +8,7 @@ Welcome to **Staybnb**, a modern full-stack web application built with cutting-e
 - 📡 **API Handling** – Efficient API requests with Axios.
 - 🏎 **State Management** – Implemented with Zustand.
 - 🎨 **Responsive Design** – Styled with Tailwind CSS.
+- 📷 **Image Upload** – Cloudinary integration for uploading room images.
 - 🚀 **High Performance** – Optimized with Vite 6 & Next.js 15 App Router.
 
 ## 🛠 Tech Stack
@@ -25,6 +26,9 @@ Welcome to **Staybnb**, a modern full-stack web application built with cutting-e
 ### **State Management & API Handling**
 - ⚡ **Zustand** – Lightweight state management.
 - 🌐 **Axios** – API requests and data fetching.
+
+### **Image Hosting**
+☁️ **Cloudinary** – Used for uploading and managing room images.
 
 ## 🏆 Challenges & Learning Experience
 1️⃣ **TypeScript Mastery** – Since I had never used TypeScript before, I learned by trial and error, refactoring my code multiple times to improve type safety and reduce runtime errors.
@@ -55,11 +59,18 @@ npm install
 ### 3️⃣ Set up environment variables
 Create a `.env.local` file and add the required variables:
 ```env
-NEXTAUTH_SECRET=your_secret_key
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-MONGODB_URI=your_mongodb_connection_string
+DATABASE_URL=
+NEXTAUTH_SECRET=
+
+GITHUB_ID=
+GITHUB_SECRET=
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
 ```
+**You need to create a free account on Cloudinary to start uploading the room images!**
 
 ### 4️⃣ Run the development server
 ```bash
