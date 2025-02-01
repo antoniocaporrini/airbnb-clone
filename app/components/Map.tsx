@@ -15,6 +15,10 @@ L.Icon.Default.mergeOptions({
   iconUrl: markerIcon,
   iconRetinaUrl: markerIcon2x,
   shadowUrl: markerShadow,
+  iconSize: [25, 41], // Aggiunto
+  iconAnchor: [12, 41], // Aggiunto
+  popupAnchor: [1, -34], // Aggiunto
+  shadowSize: [41, 41], // Aggiunto
 });
 
 interface MapProps {
