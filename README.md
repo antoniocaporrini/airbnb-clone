@@ -36,7 +36,7 @@ Welcome to **Staybnb**, a modern full-stack web application built with cutting-e
 4️⃣ **Next.js Exploration** – Coming from a traditional React background, learning **Next.js 15 (App Router)** was a great experience, especially handling server-side rendering and API routes.
 
 ## 🎬 Demo
-📌 **Watch the app in action!** *(Insert GIF of site navigation here)*
+📌 **Watch the app in action!** *(coming soon)*
 
 ![Demo GIF](https://your-gif-url-here.com/demo.gif)
 
